@@ -15,9 +15,9 @@ const connecting_database = async () => {
     );  
   }
   catch (err) {
-    console.err(err.message);
+    console.log(err.message);
     process.exit(1);
   }
 }
 
-module.exports = connecting_database();
+module.exports = connecting_database;
