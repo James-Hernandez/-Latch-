@@ -1,4 +1,8 @@
 const express = require('express');
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 const User = require('../schemas/user');
 const router = express.Router();
 
@@ -6,18 +10,44 @@ router.post(
   '/',
   async (req, res) => {
     try {
-      const { firstName, lastName, email, username, password } = req.body;
+      const { firstName, lastName, email, userName, password } = req.body;
+      
+      const salt = await bcrypt.genSalt(10);
+      const encryptPassword = await bcrypt.hash(password, salt);
+      const avatar = gravatar.url(
+        email,
+        {
+          s: '200',
+          r: 'pg',
+          d: 'retro'
+        }
+      );
       const user = await User.create({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        username: username,
-        password: password
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'userName': userName,
+        'password': encryptPassword,
+        'avatar': avatar
       });
-      res.status(200).json({user});
+      
+      const token = jwt.sign(
+        { 'id': user._id },
+        config.get('jwtSecret'),
+        { expiresIn: '20d' }
+      );
+      const userData = {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'userName': userName,
+        'avatar': avatar,
+        'token': token
+      }
+      res.status(200).json(userData);
     }
     catch (err) {
-      res.status(500).send('Server error status 500');
+      res.status(500).json({ 'error': err.message });
     }
   }
 );

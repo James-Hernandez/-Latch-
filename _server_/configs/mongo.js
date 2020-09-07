@@ -13,6 +13,7 @@ const connecting_database = async () => {
         useFindAndModify: false
       }
     );  
+    console.log('MongoDB Latched..');
   }
   catch (err) {
     console.log(err.message);
