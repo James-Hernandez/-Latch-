@@ -10,6 +10,7 @@ const server = http.createServer(app);
 connecting_database();
 app.use(express.json({ 'extended': false }));
 app.use('/register', require('./routes/register'));
+app.use('/login', require('./routes/login'));
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));

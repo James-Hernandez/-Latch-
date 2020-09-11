@@ -3,8 +3,9 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const User = require('../schemas/user');
+
 const router = express.Router();
+const User = require('../schemas/user');
 
 router.post(
   '/',
