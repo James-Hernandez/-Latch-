@@ -11,7 +11,6 @@ router.post(
   async (req, res) => {
     try {
       const { firstName, lastName, email, userName, password } = req.body;
-      
       const salt = await bcrypt.genSalt(10);
       const encryptPassword = await bcrypt.hash(password, salt);
       const avatar = gravatar.url(
@@ -36,6 +35,7 @@ router.post(
         config.get('jwtSecret'),
         { expiresIn: '20d' }
       );
+      
       const userData = {
         'firstName': firstName,
         'lastName': lastName,
@@ -47,7 +47,7 @@ router.post(
       res.status(200).json(userData);
     }
     catch (err) {
-      res.status(500).json({ 'error': err.message });
+      res.status(500).json({ 'errors': err });
     }
   }
 );
