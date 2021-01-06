@@ -4,8 +4,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
-    "client": "npm start --prefix _client_",
-    "server": "npm start --prefix _server_",
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
     "start": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
