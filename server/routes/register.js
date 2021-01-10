@@ -49,7 +49,7 @@ router.post(
         'token': token
       }
 
-      res.status(200).json(userDat)
+      res.status(200).json(userData)
     }
     catch (err) {
       res.status(500).json({ 'errors': err });
