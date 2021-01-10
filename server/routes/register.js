@@ -11,9 +11,12 @@ router.post(
   '/',
   async (req, res) => {
     try {
-      const { firstName, lastName, email, userName, password } = req.body;
+      const { userData } = req.body;
+      const { firstName, lastName, email, userName, password } = userData;
+
       const salt = await bcrypt.genSalt(10);
       const encryptPassword = await bcrypt.hash(password, salt);
+
       const avatar = gravatar.url(
         email,
         {
@@ -22,6 +25,7 @@ router.post(
           d: 'retro'
         }
       );
+
       const user = await User.create({
         'firstName': firstName,
         'lastName': lastName,
@@ -37,7 +41,7 @@ router.post(
         { expiresIn: '20d' }
       );
       
-      const userData = {
+      const newUser = {
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
@@ -45,7 +49,7 @@ router.post(
         'avatar': avatar,
         'token': token
       }
-      res.status(200).json(userData);
+      res.status(200).json(newUser)
     }
     catch (err) {
       res.status(500).json({ 'errors': err });

@@ -8,6 +8,7 @@ const app = express();
 const server = http.createServer(app);
 
 connecting_database();
+
 app.use(express.json({ 'extended': false }));
 app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/login'));

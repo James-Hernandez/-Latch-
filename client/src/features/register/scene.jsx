@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { registering } from './route';
 
 const Register = () => {
-  const [form, setForm] = useState({
+  const [userForm, setUserForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    userName: '',
     password: '',
     confirmPassword: ''
   });
@@ -13,52 +15,67 @@ const Register = () => {
     console.log("I will render every seconds");
   })
 
-  const onChange = (e,prop) => {
-    setForm({...form, [prop]:e.target.value});
+  const onChange = (e, prop) => {
+    setUserForm({...userForm, [prop]:e.target.value});
   };
 
-  const handleSubmit = (_) => {
-    const isSamePassword = form.password === form.confirmPassword;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const isSamePassword = userForm.password === userForm.confirmPassword;
     if (isSamePassword) {
-      // go a function that create a new user and send it to mongoDB with axio
-      // then go to home rooute
+      const user = {
+        'firstName': userForm.firstName,
+        'lastName': userForm.lastName,
+        'email': userForm.email,
+        'userName': userForm.userName,
+        'password': userForm.password
+      }
+      registering(user);
     }
   };
 
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className='field-input'>
         <label>
           First Name:
-          <input type='text' value={form.firstName} onChange={(e) => onChange(e, 'firstName')} />
+          <input type='text' value={userForm.firstName} onChange={(e) => onChange(e, 'firstName')} />
         </label>
       </div>
 
       <div className='field-input'>
         <label>
           Last Name:
-          <input type='text' value={form.lastName} onChange={(e) => onChange(e, 'lastName')} />
+          <input type='text' value={userForm.lastName} onChange={(e) => onChange(e, 'lastName')} />
         </label>
       </div>
 
       <div className='field-input'>
         <label>
           Email:
-          <input type='email' value={form.email} onChange={(e) => onChange(e, 'email')} />
+          <input type='email' value={userForm.email} onChange={(e) => onChange(e, 'email')} />
+        </label>
+      </div>
+
+      <div className='field-input'>
+        <label>
+          Username
+          <input type='text' value={userForm.userName} onChange={(e) => onChange(e, 'userName')} />
         </label>
       </div>
 
       <div className='field-input'>
         <label>
           Password:
-          <input type='password' value={form.password} onChange={(e) => onChange(e, 'password')} />
+          <input type='password' value={userForm.password} onChange={(e) => onChange(e, 'password')} />
         </label>
       </div>
 
       <div className='field-input'>
         <label>
           Confirm Password:
-          <input type='password' value={form.confirmPassword} onChange={(e) => onChange(e, 'confirmPassword')} />
+          <input type='password' value={userForm.confirmPassword} onChange={(e) => onChange(e, 'confirmPassword')} />
         </label>
       </div>
       
