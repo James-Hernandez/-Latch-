@@ -2,8 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import TestMenu from './component/test-menu/test-menu.component';
-
 function App() {
   return (
     <div className="App">
@@ -21,7 +19,6 @@ function App() {
           Learn React
         </a>
       </header>
-      <TestMenu />
     </div>
   );
 }
