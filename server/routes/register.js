@@ -11,8 +11,7 @@ router.post(
   '/',
   async (req, res) => {
     try {
-      const { userData } = req.body;
-      const { firstName, lastName, email, userName, password } = userData;
+      const { firstName, lastName, email, userName, password } = req.body;
 
       const salt = await bcrypt.genSalt(10);
       const encryptPassword = await bcrypt.hash(password, salt);
@@ -41,7 +40,7 @@ router.post(
         { expiresIn: '20d' }
       );
       
-      const newUser = {
+      const userData = {
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
@@ -49,7 +48,8 @@ router.post(
         'avatar': avatar,
         'token': token
       }
-      res.status(200).json(newUser)
+
+      res.status(200).json(userDat)
     }
     catch (err) {
       res.status(500).json({ 'errors': err });

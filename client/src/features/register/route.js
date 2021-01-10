@@ -8,9 +8,7 @@ export const registering = async (userData) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      data: {
-        'userData': userData
-      }
+      data: userData
     });
 
     console.log(res.data);
