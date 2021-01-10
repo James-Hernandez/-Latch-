@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from './redux/state';
 
 export const registering = async (userData) => {
   try {
@@ -12,9 +13,19 @@ export const registering = async (userData) => {
     });
 
     console.log(res.data);
+    
+    const state = {
+      type: REGISTER_SUCCESS,
+      payload: res.data
+    };
+    return state;
   }
   catch (err) {
-    console.log(err);
+    const state = {
+      type: REGISTER_FAIL,
+      payload: err
+    };
+    return state;
   }
 }
 

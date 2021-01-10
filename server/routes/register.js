@@ -47,8 +47,7 @@ router.post(
         'userName': userName,
         'avatar': avatar,
         'token': token
-      }
-
+      };
       res.status(200).json(userData)
     }
     catch (err) {

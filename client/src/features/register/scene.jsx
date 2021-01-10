@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { registering } from './route';
 
 const Register = () => {
@@ -10,6 +11,8 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("I will render every seconds");
@@ -30,8 +33,13 @@ const Register = () => {
         'email': userForm.email,
         'userName': userForm.userName,
         'password': userForm.password
+      };
+      
+      const dispatchinng_state = async () => {
+        const state = await registering(user);
+        dispatch(state);
       }
-      registering(user);
+      dispatchinng_state();
     }
   };
 
