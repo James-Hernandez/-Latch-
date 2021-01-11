@@ -6,7 +6,8 @@ const initialState = {
   email: '',
   userName: '',
   avatar: '',
-  token: ''
+  token: '',
+  errors: null
 };
 
 export default (state = initialState, action) => {
@@ -16,11 +17,15 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
+        errors: null,
         payload
       }
 
     case REGISTER_FAIL:
     default:
-      return state;
+      return {
+        ...state,
+        errors: payload
+      };
   }
 }

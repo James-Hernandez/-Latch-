@@ -11,8 +11,6 @@ export const registering = async (userData) => {
       },
       data: userData
     });
-
-    console.log(res.data);
     
     const state = {
       type: REGISTER_SUCCESS,
@@ -21,9 +19,10 @@ export const registering = async (userData) => {
     return state;
   }
   catch (err) {
+    const errors = err.response.data;
     const state = {
       type: REGISTER_FAIL,
-      payload: err
+      payload: errors
     };
     return state;
   }

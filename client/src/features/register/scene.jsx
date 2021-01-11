@@ -25,22 +25,11 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const isSamePassword = userForm.password === userForm.confirmPassword;
-    if (isSamePassword) {
-      const user = {
-        'firstName': userForm.firstName,
-        'lastName': userForm.lastName,
-        'email': userForm.email,
-        'userName': userForm.userName,
-        'password': userForm.password
-      };
-      
-      const dispatching_state = async () => {
-        const state = await registering(user);
-        dispatch(state);
-      }
-      dispatching_state();
+    const dispatching_state = async () => {
+      const state = await registering(userForm);
+      dispatch(state);
     }
+    dispatching_state();
   };
 
   return(
