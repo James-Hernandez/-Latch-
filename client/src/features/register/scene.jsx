@@ -35,11 +35,11 @@ const Register = () => {
         'password': userForm.password
       };
       
-      const dispatchinng_state = async () => {
+      const dispatching_state = async () => {
         const state = await registering(user);
         dispatch(state);
       }
-      dispatchinng_state();
+      dispatching_state();
     }
   };
 
