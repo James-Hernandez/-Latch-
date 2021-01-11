@@ -12,12 +12,26 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: async function(v) {
+        const isValid = !await this.model('users').findOne({email: v});
+        return isValid;
+      },
+      message: (props) => `${props.value} is already exist.`
+    }
   },
   userName: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: async function(v) {
+        const isValid = !await this.model('users').findOne({email: v});
+        return isValid;
+      },
+      message: (props) => `${props.value} is already exist.`
+    }
   },
   password: {
     type: String,
