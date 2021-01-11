@@ -22,10 +22,12 @@ export default (state = initialState, action) => {
       }
 
     case REGISTER_FAIL:
-    default:
       return {
         ...state,
         errors: payload
       };
+      
+    default: 
+      return state
   }
 }
