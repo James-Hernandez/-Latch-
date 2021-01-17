@@ -17,7 +17,7 @@ router.post(
 
     check('lastName')
       .notEmpty().withMessage('Last name is required.')
-      .isAlpha().withMessage('First name must be alphabets.'),
+      .isAlpha().withMessage('Last name must be alphabets.'),
 
     check('email')
       .notEmpty().withMessage('Email is required.')

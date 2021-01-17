@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import FormInput from './form.input';
+import CustomButton from './custom.button';
 //import { logingin } from './route';
 
 const Login = () => {
@@ -31,29 +33,38 @@ const Login = () => {
   };
 
   return(
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <div className="sign-in">
+      <h2>Already have an account?</h2>
+      <span>Login with your email and password</span>
+      <form onSubmit={(e) => handleSubmit(e)}>
 
-      <div className='field-input'>
-        <label>
-          Email:
-          <input type='email' value={userForm.email} onChange={(e) => onChange(e, 'email')} />
-        </label>
-      </div>
-
-      
-
-      <div className='field-input'>
-        <label>
-          Password:
-          <input type='password' value={userForm.password} onChange={(e) => onChange(e, 'password')} />
-        </label>
-      </div>
+      <FormInput 
+      name='email'
+      type='email'
+      value={userForm.email}
+      handleChange={(e) => onChange(e, 'email')}
+      label='email'
+      required
+       />
 
       
-      <button type='submit' value='Submit'>
-        Button
-      </button>
+
+      <FormInput 
+      name='password'
+      type='password'
+      value={userForm.password}
+      handleChange={(e) => onChange(e, 'password')}
+      label='password'
+      required
+       />
+
+      
+      <CustomButton type='submit'>
+       Login
+      </CustomButton>
     </form>
+    </div>
+    
   )
 }
 

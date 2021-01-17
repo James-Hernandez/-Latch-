@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registering } from './route';
+
+import Errors from './error.message';
+import FormInput from './form.input';
+import CustomButton from './custom.button';
+
 
 const Register = () => {
   const [userForm, setUserForm] = useState({
@@ -14,9 +19,11 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
+  const errors = useSelector(states => states.errors);
+
   useEffect(() => {
-    console.log("I will render every seconds");
-  })
+    console.log(errors);
+  },[errors])
 
   const onChange = (e, prop) => {
     setUserForm({...userForm, [prop]:e.target.value});
@@ -31,55 +38,78 @@ const Register = () => {
     }
     dispatching_state();
   };
+  
 
   return(
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <div className='field-input'>
-        <label>
-          First Name:
-          <input type='text' value={userForm.firstName} onChange={(e) => onChange(e, 'firstName')} />
-        </label>
-      </div>
+    <div className="sign-in">
+      <h2>Register Here</h2>
+      <span>Let's make an account</span>
+      <form onSubmit={(e) => handleSubmit(e)}>
+     
+      <FormInput 
+      name='firstName'
+      type='text'
+      value={userForm.firstName}
+      handleChange={(e) => onChange(e, 'firstName')}
+      label='firstName'
+      Errors={Errors(errors ? errors['firstName'] : '')}
+      required
+       />
 
-      <div className='field-input'>
-        <label>
-          Last Name:
-          <input type='text' value={userForm.lastName} onChange={(e) => onChange(e, 'lastName')} />
-        </label>
-      </div>
+    
+      <FormInput 
+      name='lastName'
+      type='text'
+      value={userForm.lastName}
+      handleChange={(e) => onChange(e, 'lastName')}
+      label='lastName'
+      required
+       />
 
-      <div className='field-input'>
-        <label>
-          Email:
-          <input type='email' value={userForm.email} onChange={(e) => onChange(e, 'email')} />
-        </label>
-      </div>
+    
+      <FormInput 
+      name='email'
+      type='email'
+      value={userForm.email}
+      handleChange={(e) => onChange(e, 'email')}
+      label='email'
+      required
+       />
 
-      <div className='field-input'>
-        <label>
-          Username
-          <input type='text' value={userForm.userName} onChange={(e) => onChange(e, 'userName')} />
-        </label>
-      </div>
+      <FormInput 
+      name='userName'
+      type='text'
+      value={userForm.userName}
+      handleChange={(e) => onChange(e, 'userName')}
+      label='Username'
+      required
+       />
 
-      <div className='field-input'>
-        <label>
-          Password:
-          <input type='password' value={userForm.password} onChange={(e) => onChange(e, 'password')} />
-        </label>
-      </div>
 
-      <div className='field-input'>
-        <label>
-          Confirm Password:
-          <input type='password' value={userForm.confirmPassword} onChange={(e) => onChange(e, 'confirmPassword')} />
-        </label>
-      </div>
+      <FormInput 
+      name='password'
+      type='password'
+      value={userForm.password}
+      handleChange={(e) => onChange(e, 'password')}
+      label='Password'
+      required
+       />
+
+      <FormInput 
+      name='confirmPassword'
+      type='password'
+      value={userForm.confirmPassword}
+      handleChange={(e) => onChange(e, 'confirmPassword')}
+      label='confirmPassword'
+      required
+       />
       
-      <button type='submit' value='Submit'>
-        Button
-      </button>
+      <CustomButton type='submit'>
+        Submit
+      </CustomButton>
     </form>
+    </div>
+    
   )
 }
 

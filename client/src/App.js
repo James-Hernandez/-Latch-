@@ -7,8 +7,8 @@ import {Switch, Link, Route} from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store';
 
-import Register from './features/register/scene';
-import Login from './features/login/scene';
+import Register from './features/register/page.scene';
+import Login from './features/login/page.scene';
 
 const HomePage = (props) => {
   console.log(props);
