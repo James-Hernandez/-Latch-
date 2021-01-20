@@ -3,7 +3,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult, body} = require('express-validator');
+const { check, validationResult, body } = require('express-validator');
 
 const router = express.Router();
 const User = require('../schemas/user');
@@ -32,7 +32,10 @@ router.post(
     check('confirmPassword')
       .exists()
       .custom((value, { req }) => value === req.body.password)
-      .withMessage('Password does not match.')
+      .withMessage('Password does not match.'),
+
+    body('userName')
+      .trim()
   ],
   async (req, res) => {
     try {
@@ -63,32 +66,32 @@ router.post(
       );
 
       const user = await User.create({
-        'firstName': firstName,
-        'lastName': lastName,
-        'email': email,
-        'userName': userName,
-        'password': encryptPassword,
-        'avatar': avatar
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        userName: userName,
+        password: encryptPassword,
+        avatar: avatar
       });
       
       const token = jwt.sign(
-        { 'id': user._id },
+        { id: user._id },
         config.get('jwtSecret'),
         { expiresIn: '20d' }
       );
       
       const userData = {
-        'firstName': firstName,
-        'lastName': lastName,
-        'email': email,
-        'userName': userName,
-        'avatar': avatar,
-        'token': token
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        userName: userName,
+        avatar: avatar,
+        token: token
       };
       res.status(200).json(userData)
     }
     catch (err) {
-      const errors = err.errors;
+      const errors = { errors: err.errors };
       res.status(500).json(errors);
     }
   }

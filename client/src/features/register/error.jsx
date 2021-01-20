@@ -1,10 +1,12 @@
 import React from 'react';
 
-
-
 const Error = (props) => {
+  const { message } = props;
+
   return(
-    <span>{props.message}</span>
+    <span>
+      {message}
+    </span>
   )
 }
 

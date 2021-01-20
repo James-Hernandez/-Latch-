@@ -12,22 +12,22 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
-
+  
   switch(type) {    
     case REGISTER_SUCCESS:
       return {
-        ...state,
         errors: null,
-        payload
+        ...state,
+        ...payload
       }
 
     case REGISTER_FAIL:
       return {
         ...state,
-        errors: payload
+        ...payload
       };
       
     default: 
-      return state
+      return state;
   }
 }

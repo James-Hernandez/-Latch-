@@ -12,19 +12,20 @@ export const registering = async (userData) => {
       data: userData
     });
     
-    const state = {
+    const data = res.data;
+    const action = {
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: data
     };
-    return state;
+    return action;
   }
   catch (err) {
     const errors = err.response.data;
-    const state = {
+    const action = {
       type: REGISTER_FAIL,
       payload: errors
     };
-    return state;
+    return action;
   }
 }
 

@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registering } from './route';
 
-import Errors from './error.message';
 import FormInput from './form.input';
 import CustomButton from './custom.button';
-
 
 const Register = () => {
   const [userForm, setUserForm] = useState({
@@ -18,7 +16,6 @@ const Register = () => {
   });
 
   const dispatch = useDispatch();
-
   const errors = useSelector(states => states.errors);
 
   useEffect(() => {
@@ -47,70 +44,67 @@ const Register = () => {
       <form onSubmit={(e) => handleSubmit(e)}>
      
       <FormInput 
-      name='firstName'
-      type='text'
-      value={userForm.firstName}
-      handleChange={(e) => onChange(e, 'firstName')}
-      label='firstName'
-      Errors={Errors(errors ? errors['firstName'] : '')}
-      required
+        name='firstName'
+        type='text'
+        value={userForm.firstName}
+        handleChange={(e) => onChange(e, 'firstName')}
+        label='firstName'
+        errorMessage={errors && errors['firstName'] && errors['firstName'].message}
        />
 
     
       <FormInput 
-      name='lastName'
-      type='text'
-      value={userForm.lastName}
-      handleChange={(e) => onChange(e, 'lastName')}
-      label='lastName'
-      required
+        name='lastName'
+        type='text'
+        value={userForm.lastName}
+        handleChange={(e) => onChange(e, 'lastName')}
+        label='lastName'
+        errorMessage={errors && errors['lastName'] && errors['lastName'].message}
        />
 
     
       <FormInput 
-      name='email'
-      type='email'
-      value={userForm.email}
-      handleChange={(e) => onChange(e, 'email')}
-      label='email'
-      required
+        name='email'
+        type='email'
+        value={userForm.email}
+        handleChange={(e) => onChange(e, 'email')}
+        label='email'
+        errorMessage={errors && errors['email'] && errors['email'].message}
        />
 
       <FormInput 
-      name='userName'
-      type='text'
-      value={userForm.userName}
-      handleChange={(e) => onChange(e, 'userName')}
-      label='Username'
-      required
+        name='userName'
+        type='text'
+        value={userForm.userName}
+        handleChange={(e) => onChange(e, 'userName')}
+        label='Username'
+        errorMessage={errors && errors['userName'] && errors['userName'].message}
        />
 
 
       <FormInput 
-      name='password'
-      type='password'
-      value={userForm.password}
-      handleChange={(e) => onChange(e, 'password')}
-      label='Password'
-      required
+        name='password'
+        type='password'
+        value={userForm.password}
+        handleChange={(e) => onChange(e, 'password')}
+        label='Password'
+        errorMessage={errors && errors['password'] && errors['password'].message}
        />
 
       <FormInput 
-      name='confirmPassword'
-      type='password'
-      value={userForm.confirmPassword}
-      handleChange={(e) => onChange(e, 'confirmPassword')}
-      label='confirmPassword'
-      required
+        name='confirmPassword'
+        type='password'
+        value={userForm.confirmPassword}
+        handleChange={(e) => onChange(e, 'confirmPassword')}
+        label='confirmPassword'
+        errorMessage={errors && errors['confirmPassword'] && errors['confirmPassword'].message}
        />
       
       <CustomButton type='submit'>
         Submit
       </CustomButton>
     </form>
-    </div>
-    
-  )
-}
+  </div>  
+)}
 
 export default Register;
