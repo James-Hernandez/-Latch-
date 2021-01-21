@@ -22,7 +22,6 @@ const HomePage = (props) => {
 };
 
 function App() {
-
   return (
     <Provider store={store}>
       <div className="App">
@@ -30,8 +29,7 @@ function App() {
           <Route exact path ="/" component={HomePage}/>
           <Route exact path ='/register' component={Register}/>
           <Route exact path="/login" component={Login} />
-        </Switch>
-         
+        </Switch>  
       </div>
     </Provider>
   );
