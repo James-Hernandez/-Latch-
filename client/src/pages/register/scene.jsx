@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registering } from './route';
+import { registering } from '../../dispatch/register';
 
-import FormInput from './form.input';
-import CustomButton from './custom.button';
+import FormInput from '../../components/form.input';
+import CustomButton from '../../components/custom.button';
+
+import './styles.scss';
 
 const Register = () => {
   const [userForm, setUserForm] = useState({

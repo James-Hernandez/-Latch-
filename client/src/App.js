@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
-import {Switch, Link, Route} from 'react-router-dom';
+import { Switch, Link, Route } from 'react-router-dom';
 
 import { Provider } from 'react-redux'
 import store from './store';
 
-import Register from './features/register/page.scene';
-import Login from './features/login/page.scene';
+import Register from './pages/register/scene';
+import Login from './pages/login/scene';
 
 const HomePage = (props) => {
   console.log(props);

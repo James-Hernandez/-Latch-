@@ -2,7 +2,6 @@ import React from 'react';
 import { Fragment } from 'react';
 
 import Errors from './error';
-import './styles.scss';
 
 const FormInput = ({handleChange, label, errorMessage, ...otherProps}) => (
   <Fragment>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REGISTER_SUCCESS, REGISTER_FAIL } from './redux/state';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from '../states/register';
 
 export const registering = async (userData) => {
   try {

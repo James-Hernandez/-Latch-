@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import FormInput from './form.input';
-import CustomButton from './custom.button';
+
+import FormInput from '../../components/form.input';
+import CustomButton from '../../components/custom.button';
+
 //import { logingin } from './route';
+
+import './styles.scss';
 
 const Login = () => {
   const [userForm, setUserForm] = useState({
-    
     email: '',
     password: ''
-    
   });
 
   const dispatch = useDispatch();

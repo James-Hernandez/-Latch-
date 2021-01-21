@@ -1,4 +1,4 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL } from './state';
+import { REGISTER_SUCCESS, REGISTER_FAIL } from '../states/register';
 
 const initialState = {
   firstName: '',
@@ -17,7 +17,6 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         errors: null,
-        ...state,
         ...payload
       }
 
