@@ -19,11 +19,9 @@ const HomePage = (props) => {
     <Link to={`${props.match.url}register`}>Register</Link>
   </div>
   )
-  
 };
 
 function App() {
-
 
   return (
     <Provider store={store}>
@@ -36,7 +34,6 @@ function App() {
          
       </div>
     </Provider>
-    
   );
 }
 

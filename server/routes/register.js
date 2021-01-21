@@ -43,8 +43,7 @@ router.post(
         return {
           message: prop.msg
         };
-      };
-      
+      }; 
       const result = validationResult(req).formatWith(errorFormatter);
       if (!result.isEmpty()) {
         const errors = { errors: result.mapped() };
