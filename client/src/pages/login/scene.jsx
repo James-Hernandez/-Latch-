@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import FormInput from '../../components/form.input';
 import CustomButton from '../../components/custom.button';
+import Error from '../../components/error';
 
-//import { logingin } from './route';
+import { loginning } from '../../dispatch/login';
 
 import './styles.scss';
 
@@ -16,8 +17,10 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
+  const errors = useSelector((state) => state.errors);
+
   useEffect(() => {
-    console.log("I will render every seconds");
+    console.log(errors);
   })
 
   const onChange = (e, prop) => {
@@ -28,8 +31,8 @@ const Login = () => {
     e.preventDefault();
 
     const dispatching_state = async () => {
-      // const state = await logingin(userForm);
-      // dispatch(state);
+      const state = await loginning(userForm);
+      dispatch(state);
     }
     dispatching_state();
   };
@@ -38,6 +41,10 @@ const Login = () => {
     <div className="sign-in">
       <h2>Already have an account?</h2>
       <span>Login with your email and password</span>
+      <div>
+        <Error message={errors} />
+      </div>
+      
       <form onSubmit={(e) => handleSubmit(e)}>
 
       <FormInput 
@@ -46,10 +53,8 @@ const Login = () => {
       value={userForm.email}
       handleChange={(e) => onChange(e, 'email')}
       label='email'
-      required
+      errorMessage={null}
        />
-
-      
 
       <FormInput 
       name='password'
@@ -57,10 +62,9 @@ const Login = () => {
       value={userForm.password}
       handleChange={(e) => onChange(e, 'password')}
       label='password'
-      required
+      errorMessage={null}
        />
 
-      
       <CustomButton type='submit'>
        Login
       </CustomButton>

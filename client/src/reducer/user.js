@@ -1,4 +1,5 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL } from '../states/register';
+import { LOGIN_SUCCESS, LOGIN_FAIL } from '../states/login';
 
 const initialState = {
   firstName: '',
@@ -15,12 +16,14 @@ export default (state = initialState, action) => {
   
   switch(type) {    
     case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         errors: null,
         ...payload
       }
 
     case REGISTER_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
         ...payload
