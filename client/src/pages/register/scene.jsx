@@ -38,7 +38,6 @@ const Register = () => {
     dispatching_state();
   };
   
-
   return(
     <div className="sign-in">
       <h2>Register Here</h2>

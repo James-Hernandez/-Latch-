@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { loginning } from '../../dispatch/login';
 
 import FormInput from '../../components/form.input';
 import CustomButton from '../../components/custom.button';
 import Error from '../../components/error';
-
-import { loginning } from '../../dispatch/login';
 
 import './styles.scss';
 
@@ -16,7 +15,6 @@ const Login = () => {
   });
 
   const dispatch = useDispatch();
-
   const errors = useSelector((state) => state.errors);
 
   useEffect(() => {
@@ -41,37 +39,35 @@ const Login = () => {
     <div className="sign-in">
       <h2>Already have an account?</h2>
       <span>Login with your email and password</span>
+
       <div>
         <Error message={errors} />
       </div>
       
       <form onSubmit={(e) => handleSubmit(e)}>
+        <FormInput 
+          name='email'
+          type='email'
+          value={userForm.email}
+          handleChange={(e) => onChange(e, 'email')}
+          label='email'
+          errorMessage={null}
+        />
 
-      <FormInput 
-      name='email'
-      type='email'
-      value={userForm.email}
-      handleChange={(e) => onChange(e, 'email')}
-      label='email'
-      errorMessage={null}
-       />
+        <FormInput 
+          name='password'
+          type='password'
+          value={userForm.password}
+          handleChange={(e) => onChange(e, 'password')}
+          label='password'
+          errorMessage={null}
+        />
 
-      <FormInput 
-      name='password'
-      type='password'
-      value={userForm.password}
-      handleChange={(e) => onChange(e, 'password')}
-      label='password'
-      errorMessage={null}
-       />
-
-      <CustomButton type='submit'>
-       Login
-      </CustomButton>
-    </form>
-    </div>
-    
-  )
-}
+        <CustomButton type='submit'>
+        Login
+        </CustomButton>
+      </form>
+    </div>   
+)}
 
 export default Login;
