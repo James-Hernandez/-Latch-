@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store';
 
@@ -19,9 +19,9 @@ const HomePage = (props) => {
   )
 };
 
-function App() {
+const App = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Provider store={store}>
         <div className='App'>
           <Switch>
@@ -31,7 +31,7 @@ function App() {
           </Switch>  
         </div>
       </Provider>
-    </Router>
+    </BrowserRouter>
   );
 }
 
