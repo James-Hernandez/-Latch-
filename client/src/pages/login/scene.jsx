@@ -15,11 +15,11 @@ const Login = () => {
   });
 
   const dispatch = useDispatch();
-  const errors = useSelector((state) => state.errors);
+  const errors = useSelector((state) => state.user.errors);
 
   useEffect(() => {
     console.log(errors);
-  })
+  }, [errors]);
 
   const onChange = (e, prop) => {
     setUserForm({...userForm, [prop]:e.target.value});

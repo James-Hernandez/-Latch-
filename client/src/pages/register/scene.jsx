@@ -18,11 +18,11 @@ const Register = () => {
   });
 
   const dispatch = useDispatch();
-  const errors = useSelector(states => states.errors);
-
+  const errors = useSelector(states => states.user.errors);
+  
   useEffect(() => {
     console.log(errors);
-  },[errors])
+  }, [errors]);
 
   const onChange = (e, prop) => {
     setUserForm({...userForm, [prop]:e.target.value});
@@ -38,7 +38,6 @@ const Register = () => {
     dispatching_state();
   };
   
-
   return(
     <div className="sign-in">
       <h2>Register Here</h2>

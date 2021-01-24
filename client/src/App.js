@@ -9,7 +9,7 @@ import Login from './pages/login/scene';
 import './App.css';
 
 const HomePage = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <div>
     <Link to={`${props.match.url}login`}>login</Link>
