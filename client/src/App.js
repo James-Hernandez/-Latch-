@@ -1,14 +1,12 @@
 import React from 'react';
-
-import './App.css';
-
 import { Switch, Link, Route } from 'react-router-dom';
-
 import { Provider } from 'react-redux'
 import store from './store';
 
 import Register from './pages/register/scene';
 import Login from './pages/login/scene';
+
+import './App.css';
 
 const HomePage = (props) => {
   console.log(props);
@@ -24,11 +22,11 @@ const HomePage = (props) => {
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className='App'>
         <Switch>
-          <Route exact path ="/" component={HomePage}/>
-          <Route exact path ='/register' component={Register}/>
-          <Route exact path="/login" component={Login} />
+          <Route exact path='/' component={HomePage}/>
+          <Route exact path='/register' component={Register}/>
+          <Route exact path='/login' component={Login} />
         </Switch>  
       </div>
     </Provider>
