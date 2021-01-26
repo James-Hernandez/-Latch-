@@ -21,7 +21,6 @@ const Register = () => {
   const errors = useSelector(states => states.user.errors);
   
   useEffect(() => {
-    console.log(errors);
   }, [errors]);
 
   const onChange = (e, prop) => {

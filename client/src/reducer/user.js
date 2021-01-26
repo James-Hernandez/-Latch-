@@ -28,6 +28,9 @@ export default (state = initialState, action) => {
         ...state,
         ...payload
       };
+    
+    case 'CLEAR_DATA':
+      return initialState;
       
     default: 
       return state;

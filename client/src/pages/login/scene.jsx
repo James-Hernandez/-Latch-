@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { loginning } from '../../dispatch/login';
 
 import FormInput from '../../components/form.input';
@@ -16,10 +17,11 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.user.errors);
+  const location = useLocation();
 
   useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+
+  }, []);
 
   const onChange = (e, prop) => {
     setUserForm({...userForm, [prop]:e.target.value});
@@ -39,6 +41,14 @@ const Login = () => {
     <div className="sign-in">
       <h2>Already have an account?</h2>
       <span>Login with your email and password</span>
+
+      <br/>
+      <Link to={{
+        pathname: '/home', 
+        state: { prevPath: location.pathname }
+      }}>
+        Home
+      </Link>
 
       <div>
         <Error message={errors} />
