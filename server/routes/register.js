@@ -90,8 +90,7 @@ router.post(
       res.status(200).json(userData)
     }
     catch (err) {
-      const errors = { errors: err.errors };
-      res.status(500).json(errors);
+      res.status(500).send(err.errors);
     }
   }
 );

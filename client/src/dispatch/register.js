@@ -17,7 +17,12 @@ export const registering = async (userData) => {
       type: REGISTER_SUCCESS,
       payload: data
     };
-    return action;
+
+    const state = {
+      action: action,
+      isValid: true
+    }
+    return state;
   }
   catch (err) {
     const errors = err.response.data;
@@ -25,7 +30,12 @@ export const registering = async (userData) => {
       type: REGISTER_FAIL,
       payload: errors
     };
-    return action;
+
+    const state = {
+      action: action,
+      isValid: false
+    }
+    return state;
   }
 }
 

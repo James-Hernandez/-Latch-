@@ -39,7 +39,7 @@ router.post(
       res.status(200).json(userData);
     }
     catch (err) {
-      res.status(500).json({ 'errors': err.message });
+      res.status(500).send(err.message);
     }
   }
 );

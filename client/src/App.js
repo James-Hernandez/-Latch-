@@ -55,6 +55,7 @@ const App = () => {
       console.log(location);
       switch(action) {
         case 'POP':
+        case 'PUSH':
           const action = {type: 'CLEAR_DATA'}
           dispatch(action);
       }

@@ -18,14 +18,24 @@ export const loginning = async (userData) => {
       type: LOGIN_SUCCESS,
       payload: data
     };
-    return action;
+
+    const state = {
+      action: action,
+      isValid: true
+    }
+    return state;
   }
   catch (err) {
-    const errors = err.response.data;
+    const error = err.response.data;
     const action = {
       type: LOGIN_FAIL,
-      payload: errors
+      payload: error
     };
-    return action;
+    
+    const state = {
+      action: action,
+      isValid: false
+    }
+    return state;
   }
 }

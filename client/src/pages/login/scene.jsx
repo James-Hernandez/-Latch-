@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { loginning } from '../../dispatch/login';
 
 import FormInput from '../../components/form.input';
@@ -16,12 +16,8 @@ const Login = () => {
   });
 
   const dispatch = useDispatch();
-  const errors = useSelector((state) => state.user.errors);
-  const location = useLocation();
-
-  useEffect(() => {
-
-  }, []);
+  const error = useSelector((state) => state.error);
+  const history = useHistory();
 
   const onChange = (e, prop) => {
     setUserForm({...userForm, [prop]:e.target.value});
@@ -30,11 +26,15 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const dispatching_state = async () => {
-      const state = await loginning(userForm);
-      dispatch(state);
+    const dispatching = async () => {
+      const { action, isValid } = await loginning(userForm);
+      dispatch(action);
+
+      if (isValid) {
+        history.push('/home')
+      }
     }
-    dispatching_state();
+    dispatching();
   };
 
   return(
@@ -42,16 +42,8 @@ const Login = () => {
       <h2>Already have an account?</h2>
       <span>Login with your email and password</span>
 
-      <br/>
-      <Link to={{
-        pathname: '/home', 
-        state: { prevPath: location.pathname }
-      }}>
-        Home
-      </Link>
-
       <div>
-        <Error message={errors} />
+        <Error message={error} />
       </div>
       
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -61,7 +53,6 @@ const Login = () => {
           value={userForm.email}
           handleChange={(e) => onChange(e, 'email')}
           label='email'
-          errorMessage={null}
         />
 
         <FormInput 
@@ -70,7 +61,6 @@ const Login = () => {
           value={userForm.password}
           handleChange={(e) => onChange(e, 'password')}
           label='password'
-          errorMessage={null}
         />
 
         <CustomButton type='submit'>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 import { registering } from '../../dispatch/register';
 
 import FormInput from '../../components/form.input';
@@ -18,10 +19,8 @@ const Register = () => {
   });
 
   const dispatch = useDispatch();
-  const errors = useSelector(states => states.user.errors);
-  
-  useEffect(() => {
-  }, [errors]);
+  const error = useSelector(states => states.error);
+  const history = useHistory();
 
   const onChange = (e, prop) => {
     setUserForm({...userForm, [prop]:e.target.value});
@@ -30,11 +29,15 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const dispatching_state = async () => {
-      const state = await registering(userForm);
-      dispatch(state);
+    const dispatching = async () => {
+      const { action, isValid} = await registering(userForm);
+      dispatch(action);
+
+      if (isValid) {
+        history.push('/home');
+      }
     }
-    dispatching_state();
+    dispatching();
   };
   
   return(
@@ -49,7 +52,7 @@ const Register = () => {
           value={userForm.firstName}
           handleChange={(e) => onChange(e, 'firstName')}
           label='firstName'
-          errorMessage={errors && errors['firstName'] && errors['firstName'].message}
+          errorMessage={error && error['firstName'] && error['firstName'].message}
         />
 
         <FormInput 
@@ -58,7 +61,7 @@ const Register = () => {
           value={userForm.lastName}
           handleChange={(e) => onChange(e, 'lastName')}
           label='lastName'
-          errorMessage={errors && errors['lastName'] && errors['lastName'].message}
+          errorMessage={error && error['lastName'] && error['lastName'].message}
         />
 
         <FormInput 
@@ -67,7 +70,7 @@ const Register = () => {
           value={userForm.email}
           handleChange={(e) => onChange(e, 'email')}
           label='email'
-          errorMessage={errors && errors['email'] && errors['email'].message}
+          errorMessage={error && error['email'] && error['email'].message}
         />
 
         <FormInput 
@@ -76,7 +79,7 @@ const Register = () => {
           value={userForm.userName}
           handleChange={(e) => onChange(e, 'userName')}
           label='Username'
-          errorMessage={errors && errors['userName'] && errors['userName'].message}
+          errorMessage={error && error['userName'] && error['userName'].message}
         />
 
         <FormInput 
@@ -85,7 +88,7 @@ const Register = () => {
           value={userForm.password}
           handleChange={(e) => onChange(e, 'password')}
           label='Password'
-          errorMessage={errors && errors['password'] && errors['password'].message}
+          errorMessage={error && error['password'] && error['password'].message}
         />
 
         <FormInput 
@@ -94,7 +97,7 @@ const Register = () => {
           value={userForm.confirmPassword}
           handleChange={(e) => onChange(e, 'confirmPassword')}
           label='confirmPassword'
-          errorMessage={errors && errors['confirmPassword'] && errors['confirmPassword'].message}
+          errorMessage={error && error['confirmPassword'] && error['confirmPassword'].message}
         />
         
         <CustomButton type='submit'>

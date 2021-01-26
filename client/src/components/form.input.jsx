@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 
 import Errors from './error';
 
-const FormInput = ({handleChange, label, errorMessage, ...otherProps}) => (
+const FormInput = ({handleChange, label, errorMessage = null, ...otherProps}) => (
   <Fragment>
     <Errors
       message={errorMessage}
