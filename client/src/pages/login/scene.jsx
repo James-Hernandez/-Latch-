@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { loginning } from '../../dispatch/login';
+import { loginning } from '../../dispatchs/login';
 
 import FormInput from '../../components/form.input';
 import CustomButton from '../../components/custom.button';

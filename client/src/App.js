@@ -46,29 +46,28 @@ const Home = () => {
 }
 
 const App = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const dispatch = useDispatch()
 
   useEffect(() => {
     return history.listen((location, action) => {
-      console.log(action);
-      console.log(location);
       switch(action) {
         case 'POP':
         case 'PUSH':
           const action = {type: 'CLEAR_DATA'}
           dispatch(action);
+          break;
       }
     });
   }, [history]);
-
+ 
   return (
     <div className='App'>
       <Switch>
         <Route exact path='/' component={Landing}/>
         <Route exact path='/register' component={Register}/>
-        <Route exact path='/login' component={Login} />
-        <Route exact ath='/home' component={Home} />
+        <Route exact path='/login' component={Login}/>
+        <Route exact ath='/home' component={Home}/>
       </Switch>  
     </div>
   );
